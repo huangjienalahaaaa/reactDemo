@@ -1,62 +1,59 @@
 import React, { Component, Fragment } from "react";
 class Xiaojiejie extends Component {
-  //js的构造函数，由于其他任何函数执行
   constructor(props) {
-    super(props); //调用父类的构造函数，固定写法(这里的我父类是那个？就是上面的Component)
-    //这个案例中的所有的数据都放在this.state里面．
+    super(props);
     this.state = {
-      inputValue: "", // input中的值
-      list: [], //服务列表
+      inputValue: "",
+      list: ["基础按摩", "精油推背"], //１．添加一些基础数据
     };
   }
   render() {
     return (
       <Fragment>
         <div>
-          {/* １．对input进行数据绑定,如下代码．但是这个这个时候你在ｉｎｐｕｔ中敲代码，但是无论你如何敲键盘,你都会发现这个input中的数据没有任何变化，因为这里我们采用的是＂数据绑定＂，但是如上构造函数中的this.state.inputValue这个数据没有发生任何变化，所以这里是不会发生任何变化的．所以接下去我们要学习信的知识点－＞事件绑定*/}
-          {/* <input value={this.state.inputValue} />  */}
-          {/* ２．事件绑定 ，加入onChange，监听状态值的变化*/}
-          {/* <input value={this.state.inputValue} onChange={this.inputChange} /> */}
           <input
             value={this.state.inputValue}
             onChange={this.inputChange.bind(this)}
           />
-          　<button> 增加服务 </button>
+          {/* ３.绑定一个方法this.addList */}　
+          <button onClick={this.addList.bind(this)}> 增加服务 </button>
         </div>
         <ul>
-          <li>头部按摩</li>
-          <li>精油推背</li>
+          {/* ２．循环基础数据 */}
+          {this.state.list.map((item, index) => {
+            // return <li>{item}</li>;
+            // ６．添加key值．这里你在工作中千万不能写成key={index}：因为你在工作中，你的索引值可能有很多项，即你的页面中可能有很多循环，这个时候你用索引可能就会重复，重复之后它也会报错．所以我们比较安全的方式，就是后面再加一个item,这样重复的概率就很小了．
+            return <li key={index + item}>{item}</li>;
+          })}
         </ul>
       </Fragment>
     );
   }
-  //事件绑定函数写这里（写在render外面）
   inputChange(e) {
-    /* 写完之后，运行代码，在界面中的input写入值，可以发现报错了：
-    
-    xiaojiejie.js:31 Uncaught TypeError: Cannot read property 'state' of undefined
-
-    －＞　其实我们范了两个错误：
-    １．一个是this指向不对，你需要重新用bind设置一下指向(ES6的语法)。
-    ２．另一个是React中改变值需要使用this.setState方法。
-
-    
-    * １．第一个错误很好解决，直接再JSX部分，利用bind进行绑定就好：
-     <input value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
-    * 2. 这步做完，我们还需要加入setState方法，改变值:
-            inputChange(e){
-            // console.log(e.target.value);
-            // this.state.inputValue=e.target.value;
-            this.setState({
-                inputValue:e.target.value
-            })
-        }
-    */
-
-    // this.state.inputValue = e.target.value;
-
     this.setState({
       inputValue: e.target.value,
+    });
+  }
+  //增加服务的按钮响应方法
+  addList() {
+    this.setState({
+      /*
+            4. 这里使用es6中的＂预算扩展符＂的这个东西，就是...这三个点：
+            ...this.state.list代表：将this.state.list中的东西都扩展出来了．
+            所以下面  list: [...this.state.list, this.state.inputValue]这句话就相当于：
+              list: ["基础按摩", "精油推背", this.state.inputValue]，所以此时里面有３个数．
+            ５.然后运行项目，在input中写如数据，然后点击＂增加服务＂按钮，你会发现虽然功能是实现了，但是控制台有一个警告：
+            Warning:Each child in a list shoul have a unique "key" prop
+
+            * 这个错误的大概意思就是缺少key值。就是在用map循环时，需要设置一个不同的值，这个时React的要求。我们可以暂时用index+item的形式来实现,如上：
+            {this.state.list.map((item, index) => {
+                return <li key={index + item}>{item}</li>;
+             })}
+
+        */
+      list: [...this.state.list, this.state.inputValue],
+      //   inputValue:''是为了：每次添加完数据之后,input为空，里面没有数据
+      inputValue: "",
     });
   }
 }
