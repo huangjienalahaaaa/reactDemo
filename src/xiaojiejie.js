@@ -4,7 +4,7 @@ class Xiaojiejie extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      list: ["基础按摩", "精油推背"], //１．添加一些基础数据
+      list: ["基础按摩", "精油推背"],
     };
   }
   render() {
@@ -15,15 +15,18 @@ class Xiaojiejie extends Component {
             value={this.state.inputValue}
             onChange={this.inputChange.bind(this)}
           />
-          {/* ３.绑定一个方法this.addList */}　
           <button onClick={this.addList.bind(this)}> 增加服务 </button>
         </div>
         <ul>
-          {/* ２．循环基础数据 */}
           {this.state.list.map((item, index) => {
-            // return <li>{item}</li>;
-            // ６．添加key值．这里你在工作中千万不能写成key={index}：因为你在工作中，你的索引值可能有很多项，即你的页面中可能有很多循环，这个时候你用索引可能就会重复，重复之后它也会报错．所以我们比较安全的方式，就是后面再加一个item,这样重复的概率就很小了．
-            return <li key={index + item}>{item}</li>;
+            return (
+              <li
+                key={index + item}
+                onClick={this.deleteItem.bind(this, index)}
+              >
+                {item}
+              </li>
+            );
           })}
         </ul>
       </Fragment>
@@ -34,26 +37,35 @@ class Xiaojiejie extends Component {
       inputValue: e.target.value,
     });
   }
-  //增加服务的按钮响应方法
   addList() {
     this.setState({
-      /*
-            4. 这里使用es6中的＂预算扩展符＂的这个东西，就是...这三个点：
-            ...this.state.list代表：将this.state.list中的东西都扩展出来了．
-            所以下面  list: [...this.state.list, this.state.inputValue]这句话就相当于：
-              list: ["基础按摩", "精油推背", this.state.inputValue]，所以此时里面有３个数．
-            ５.然后运行项目，在input中写如数据，然后点击＂增加服务＂按钮，你会发现虽然功能是实现了，但是控制台有一个警告：
-            Warning:Each child in a list shoul have a unique "key" prop
-
-            * 这个错误的大概意思就是缺少key值。就是在用map循环时，需要设置一个不同的值，这个时React的要求。我们可以暂时用index+item的形式来实现,如上：
-            {this.state.list.map((item, index) => {
-                return <li key={index + item}>{item}</li>;
-             })}
-
-        */
       list: [...this.state.list, this.state.inputValue],
-      //   inputValue:''是为了：每次添加完数据之后,input为空，里面没有数据
       inputValue: "",
+    });
+  }
+  //删除单项服务
+  deleteItem(index) {
+    /*
+    1.arrayObject.splice():
+    * splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。
+    * 如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。
+    
+
+    2.其实这里边是有一个坑的,有的小伙伴肯定会认为下面的代码也是正确的.
+    //删除单项服务
+      deleteItem(index){
+          this.state.list.splice(index,1)
+          this.setState({
+              list:this.state.list
+          }) 
+      }
+      ->记住React是禁止直接操作state的,虽然上面的方法也管用,但是在后期的性能优化上会有很多麻烦,所以一定不要这样操作.这也算是我React初期踩的比较深的一个坑,希望小伙伴们可以跳坑.
+
+    */
+    let list = this.state.list;
+    list.splice(index, 1);
+    this.setState({
+      list: list,
     });
   }
 }
