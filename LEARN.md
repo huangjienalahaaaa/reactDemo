@@ -93,7 +93,7 @@ JSX 中的代码注释是非常有讲究的，这个书上介绍的也非常少�
 
 > import './style.css'
 
-第三部：给 JSX 加入`class,注意下面的代码是错误的。
+第三步：给 JSX 加入`class,注意下面的代码是错误的。
 
 > <input class="input" value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
 
@@ -144,7 +144,7 @@ JSX 中<label>的坑，也算是比较大的一个坑，label 是 html 中的一
 </div>
 ```
 
-这时候想点击“加入服务”直接可以激活文本框，方便输入。按照 html 的原思想，是直接加 ID 就可以了。代码如下：
+这时候想点击“加入服务”直接可以激活文本框，方便输入。按照 html 的原思想，是 input 中直接加 ID ，然后 label 中加入 for="input 对应的 id 值"．这个时候你点击 label 标签，就会激活 input 输入框．代码如下：
 
 ```javascript
 <div>
@@ -159,7 +159,7 @@ JSX 中<label>的坑，也算是比较大的一个坑，label 是 html 中的一
 </div>
 ```
 
-这时候你浏览效果虽然可以正常，但 console 里还是有红色警告提示的。大概意思是不能使用 for.它容易和 javascript 里的 for 循环混淆，会提示你使用 htmlfor。
+这时候你浏览效果虽然可以正常，但 console 里还是有红色警告提示的。大概意思是不能使用 for.它容易和 javascript 里的 for 循环混淆，会提示你使用 <font color="red">htmlfor</font> 。
 
 ```javascript
 <div>
@@ -174,33 +174,5 @@ JSX 中<label>的坑，也算是比较大的一个坑，label 是 html 中的一
 </div>
 ```
 
-这时候代码就正确了，可以实现点击<label>后,激活<input>标签了。
+这时候代码就正确了，可以实现点击\<label>后,激活\<input>标签了。
 这节算是我总结的一些 JSX 中的坑吧，总结出来，希望小伙伴们少踩这些坑，能快速上手 React
-
-# v1.7 React 进阶-JSX 防踩坑的几个地方:
-
-> 这节课很短，但是我觉的有必要单独拿出一节来讲讲。在工作中你经常会看到程序老司机写代码是非常快的，甚至让你烟花缭乱，那他们真的是单身那么多年，练就了超级快手吗?当然不是，只是他们使用了快速生成插件，这节课我就向大家介绍一个 vscode 中的 Simple React Snippets，有了这个插件，稍加练习，你也可以像老司机一样，拥有加藤鹰的圣手(如果不懂请自行搜索吧)。
-
-- vscode 中的 Simple React Snippets:
-
-**_1．快速进行引入 import:_**
-
-> 直接在 vscode 中输入 imrc，就会快速生成最常用的 import 代码:
-> import React, { Component } from 'react';
-
-**_２．快速生产 class:_**
-
-> 在作组件的时候，都需要写一个固定的基本格式，这时候你就可以使用快捷键 cc.插件就会快速帮我们生成如下代码：
-
-```javascript
-
-class  extends Component {
-    state = {  }
-    render() {
-        return (  );
-    }
-}
-
-export default ;
-
-```
