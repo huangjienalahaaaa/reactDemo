@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// 引入子组件
 import XiaojiejieItem from "./XiaojiejieItem";
 class Xiaojiejie extends Component {
   constructor(props) {
@@ -22,9 +21,13 @@ class Xiaojiejie extends Component {
         <ul>
           {this.state.list.map((item, index) => {
             return (
-              <div>
-                {/* 使用子组件 */}
-                <XiaojiejieItem></XiaojiejieItem>
+              <div key={item + index}>
+                {/* 1.父组件向子组件传递很简单：就是在属性值上面传递，如下通过content属性与index属性来向子组件传值(还有传递了deleteItem事件，为了子组件向父组件传递消息)： */}
+                <XiaojiejieItem
+                  content={item}
+                  index={index}
+                  deleteItem={this.deleteItem.bind(this)}
+                ></XiaojiejieItem>
               </div>
             );
           })}
