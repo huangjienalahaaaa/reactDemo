@@ -212,3 +212,93 @@ export default ;
 # v1.9 父子组件的传递:
 
 > 通过上节课的学习，已经把"小姐姐"组件做了一个基本的拆分，但是还不能实现随着输入，显示出输入的内容。这里涉及的是父组件向子组件传值。然后点击删除，就相当于子组件向父组件传值。这节课就主要学习一下父子组件传值的一些技巧。
+
+# v1.10 单项数据流和其他:
+
+> 这节课我们讲一些理论性的东西，比如：React 单项数据流、React 同其他框架共同工作和函数式编程的一些概念，这节课可能会稍显无聊，因为都是理论的东西，但是这些知识无论是在面试中，还是在工作中都会经常遇到，所以也是跳不过去的一节课。
+
+**_1.单项数据流_**
+
+React 的特性中有一个概念叫做“单项数据流”,可能刚刚接触 React 的小伙伴不太明白这个概念，还是拿出《小姐姐服务菜单》的 Demo，来给大家讲解。比如我们在父组件中可以直接把 <font color="#DAA520">this.state.list </font>传递过来。例如下面代码:
+
+```javascript
+<ul>
+  {this.state.list.map((item, index) => {
+    return (
+      <XiaojiejieItem
+        key={index + item}
+        content={item}
+        index={index}
+        list={this.state.list} //这里这里这里！！！！！
+        deleteItem={this.deleteItem.bind(this)}
+      />
+    );
+  })}
+</ul>
+```
+
+其实这样传是没有问题的，问题是你只能使用这个值，而不能修改这个值，如果你修改了，比如我们把代码写成这样：
+
+```javascript
+handleClick(){
+    //关键代码——---------start
+    this.props.list=[]
+    //关键代码-----------end
+    this.props.deleteItem(this.props.index)
+}
+```
+
+就会报下面的错误；
+
+```javascript
+TypeError: Cannot assign to read only property 'list' of object '#<Object>'
+```
+
+意思就是 list 是只读的，单项数据流。那如果要改变这里边的值怎么办?其实上节课已经讲过了，就是通过传递父组件的方法。
+
+**_２.和其他框架配合使用_**
+
+> 有小伙伴问我，React 和 jquery 能一起使用吗？
+> 答案：是可以的，React 其实可以模块化和组件化开发。看/public/index.html 文件，代码如下：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--关键代码start-->
+    <div id="root"></div>
+    <!--关键代码end-->
+  </body>
+</html>
+```
+
+其实 React 只对这一个\<div>,外边的其他 DOM 并不受任何影响，比如我们在它的下方再写一个\<div>，然后查看效果。
+
+```html
+<div id="root"></div>
+<div style="color:red">今天过的好开心，服务很满意！</div>
+```
+
+你可以在其他的 div 里加入任何内容，但是这种情况很少，我也不建议这么使用。希望小伙伴们还是统一技术栈。
+
+**_3.函数式编程_**
+
+> 在面试 React 时，经常会问道的一个问题是：函数式编程的好处是什么？
+>
+> 1. 函数式编程让我们的代码更清晰，每个功能都是一个函数。
+> 2. 函数式编程为我们的代码测试代理了极大的方便，更容易实现前端自动化测试。
+
+React 框架也是函数式编程，所以说优势在大型多人开发的项目中会更加明显，让配合和交流都得心应手。
+
+总结:这节课虽然都是些理论知识，这些知识在面试中经常被问到，所以也是必须掌握的内容。
