@@ -350,12 +350,13 @@ React developer tools 的三种状态:
 
 **_Mounting 阶段:_**
 
-1. <font color="red">Mounting</font> 阶段叫挂载阶段，伴随着整个虚拟 DOM 的生成，它里边有三个小的生命周期函数，分别是：
+Mounting 阶段叫挂载阶段，伴随着整个虚拟 DOM 的生成，它里边有三个小的生命周期函数，分别是：
 
-2. <font color="red">componentWillMount</font> : 在组件即将被挂载到页面的时刻执行。
+1. <font color="red">componentWillMount</font>在组件即将被挂载到页面的时刻执行。
 
-3. <font color="red">render</font> : 页面 state 或 props 发生变化时执行。
-   componentDidMount : 组件挂载完成时被执行。
+2. <font color="red">render</font> :页面 state 或 props 发生变化时执行。
+
+3. <font color="red">componentDidMount</font> :组件挂载完成时被执行。
 
 - componentWillMount 代码:
 
