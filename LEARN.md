@@ -398,3 +398,86 @@ componentDidMount----组件挂载完成的时刻执行
 视频中会举例说明。
 
 > 总结:这节课讲解了 React 的生命周期函数，先是简单了解了一下 React 生命周期函数的四大阶段，然后又详细学习了一下 Mounting 挂载阶段中的三个生命周期函数。下节课会学习 Updation 阶段的生命周期函数。
+
+# v1.15 生命周期讲解－2:
+
+> 这节继续学习 React 生命周期中的 Updation 阶段,也就是组件发生改变的更新阶段，这是 React 生命周期中比较复杂的一部分，它有两个基本部分组成，一个是 props 属性改变，一个是 state 状态改变（这个在生命周期的图片中可以清楚的看到）。
+
+**_shouldComponentUpdate 函数:_**
+<font color="red">shouldComponentUpdate</font>函数会在组件更新之前，自动被执行。比如写入下面的代码:
+
+```javascript
+shouldComponentUpdate(){
+    console.log('shouldComponentUpdate---组件发生改变前执行')
+}
+```
+
+它要求返回一个布尔类型的结果，必须有返回值，这里就直接返回一个 true 了（真实开发中，这个是有大作用的）。
+
+```javascript
+shouldComponentUpdate(){
+    console.log('shouldComponentUpdate---组件发生改变前执行')
+    return true
+}
+```
+
+现在就可以在控制台 console 里看到结果了，并且结果是每次文本框发生改变时都会随着改变。如果你返回了 false，这组件就不会进行更新了。<font color="red"> 简单点说，就是返回 true，就同意组件更新;返回 false,就反对组件更新。</font>
+
+**_componentWillUpdate 函数:_**
+
+<font color="red">componentWillUpdate</font>在组件更新之前，但<font color="red">shouldComponenUpdate</font>之后被执行。但是如果<font color="red">shouldComponentUpdate</font>返回 false，这个函数就不会被执行了。
+
+```javascript
+//shouldComponentUpdate返回true才会被执行。
+componentWillUpdate(){
+    console.log('componentWillUpdate---组件更新前，shouldComponentUpdate函数之后执行')
+}
+```
+
+**_componentDidUpdate 函数:_**
+<font color="red">componentDidUpdate</font>在组件更新之后执行，它是组件更新的最后一个环节。
+
+```javascript
+componentDidUpdate(){
+    console.log('componentDidUpdate----组件更新之后执行')
+}
+```
+
+为了方便我们看出结果，可以在每个函数前加上序号。最后我们可以看到控制台输出的结果如下：
+
+```javascript
+1-shouldComponentUpdate---组件发生改变前执行
+2-componentWillUpdate---组件更新前，shouldComponentUpdate函数之后执行
+3-render----开始挂载渲染
+4-componentDidUpdate----组件更新之后执行
+```
+
+结果和我们写的顺序也是相对的，讲到这里，你一定对 React 的生命周期函数有了比较直观的了解了。
+
+**_componentWillReceiveProps 函数:_**
+我们可以先在 <font color="red">Xiaojiejie.js</font> 组件里写下这个函数，例如下面的代码。
+
+```javascript
+componentWillReceiveProps(){
+    console.log('componentWillReceiveProps')
+}
+```
+
+这时候会发现函数什么时候都不会被执行，因为 <font color="red">Xiaojiejie.js</font> 算是一个顶层组件，它并没接收任何的 <font color="red">props</font>。可以把这个函数移动到 <font color="red">XiaojiejieItem.js</font> 组件中。
+
+凡是组件都有生命周期函数，所以子组件也是有的，并且子组件接收了<font color="red">props</font>，这时候函数就可以被执行了。
+
+```javascript
+componentWillReceiveProps(){
+        console.log('child - componentWillReceiveProps')
+    }
+```
+
+这个时候再预览，就会看到 <font color="red">componentWillReceiveProps</font> 执行了。那现在可以总结一下它的执行时间了。
+
+子组件接收到父组件传递过来的参数，父组件 render 函数重新被执行，这个生命周期就会被执行。
+
+- 也就是说这个子组件第一次存在于 Dom 中，函数是不会被执行的（即：第一次渲染这个子组件的时候，这个函数是不会被执行的）;
+- 如果已经存在于 Dom 中，函数才会被执行（即：只有发生变化的时候，第二次渲染的时候，这个函数才会被执行）。
+
+这个生命周期算是比较复杂的一个生命周期，需要我们花点时间去消化。
