@@ -302,3 +302,13 @@ TypeError: Cannot assign to read only property 'list' of object '#<Object>'
 React 框架也是函数式编程，所以说优势在大型多人开发的项目中会更加明显，让配合和交流都得心应手。
 
 总结:这节课虽然都是些理论知识，这些知识在面试中经常被问到，所以也是必须掌握的内容。
+
+# v1.11 调试工具的安装及使用:
+
+> 已经可以简单的写一些 React 代码了，在视频中，我也是经常使用 console.log 这种很二的形式来调试程序。其实 React 在浏览器端是有一个调试工具的，这就是 React developer tools，这个是 React 人必下的一个调试工具。这节课就主要学习一下 React developer tools 的下载和简单使用。
+
+React developer tools 的三种状态:
+
+- 灰色： 这种就是不可以使用，说明页面不是又 React 编写的。
+- 黑色: 说明页面是用 React 编写的，并且处于生成环境当中。
+- 红色： 说明页面是用 React 编写的，并且处于调试环境当中
