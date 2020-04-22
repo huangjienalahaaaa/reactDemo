@@ -320,3 +320,80 @@ React developer tools 的三种状态:
 # v1.13 ref 的使用方法:
 
 > 在编写组件中的方法时，经常会遇到语义化很模糊的代码，这对于团队开发是一个很大的问题。因为 review 代码或者合作时都会影响开发效率。或者到这核心成员离开，项目倒闭的严重影响。所以我们必须重视 react 代码当中的语义化。ref 是个不错的工具，快来学习一下吧。
+
+# v1.14 生命周期讲解－１:
+
+> React 的生命周期是非常重要的知识点，所以关于 React 声明周期的课程可以多看几遍，我也会尽量的把 React 的生命周期讲的细致。生命周期的课程我分成三节来讲，这样更容易让你理解．
+
+**_React 生命周期图:_**
+![](learnImg/01.png)
+
+通过这张图你可以看到 React 声明周期的四个大阶段：
+
+- Initialization:初始化阶段。
+- Mounting: 挂在阶段。
+- Updation: 更新阶段。
+- Unmounting: 销毁阶段
+
+**_什么是生命周期:_**
+如果非要用一句话把生命周期函数说明白，我觉的可以用这句话来说明：
+
+> 生命周期函数指在某一个时刻组件会自动调用执行的函数
+
+举例：写的小姐姐的例子。里边的 <font color="red">render()</font>函数，就是一个生命周期函数，它在 state 发生改变时自动执行。这就是一个标准的自动执行函数。
+
+- <font color="red">constructor</font>不算生命周期
+
+<font color="red">constructor</font>我们叫构造函数，它是 ES6 的基本语法。虽然它和生命周期函数的性质一样，但不能认为是生命周期函数。
+
+但是你要心里把它当成一个生命周期函数，我个人把它看成 React 的 <font color="red">Initialization</font> 阶段，定义属性（props）和状态(state)。
+
+**_Mounting 阶段:_**
+
+1. <font color="red">Mounting</font> 阶段叫挂载阶段，伴随着整个虚拟 DOM 的生成，它里边有三个小的生命周期函数，分别是：
+
+2. <font color="red">componentWillMount</font> : 在组件即将被挂载到页面的时刻执行。
+
+3. <font color="red">render</font> : 页面 state 或 props 发生变化时执行。
+   componentDidMount : 组件挂载完成时被执行。
+
+- componentWillMount 代码:
+
+```javascript
+componentWillMount(){
+    console.log('componentWillMount----组件将要挂载到页面的时刻')
+}
+```
+
+- componentDidMount 代码:
+
+```javascript
+componentDidMount(){
+    console.log('componentDidMount----组件挂载完成的时刻执行')
+}
+```
+
+- render 代码:
+
+```javascript
+
+render(){
+    console.log('render---组件挂载中.......')
+}
+```
+
+这时候我们查看一下控制台，会为我们打出如下提示：
+
+```javascript
+componentWillMount----组件将要挂载到页面的时刻执行
+render----开始挂载渲染
+componentDidMount----组件挂载完成的时刻执行
+```
+
+这也是生命周期的顺序。有小伙伴会问我，这个函数书写有顺序吗?哪个在前？哪个在后？其实是没有顺序的，你可以随便改动他们的顺序。
+
+**_注意的问题:_**
+<font color="red">componentWillMount</font>和<font color="red">componentDidMount</font>这两个生命周期函数，只在页面刷新时执行一次，而<font color="red">render</font>函数是只要有 state 和 props 变化就会执行，这个初学者一定要注意。
+视频中会举例说明。
+
+> 总结:这节课讲解了 React 的生命周期函数，先是简单了解了一下 React 生命周期函数的四大阶段，然后又详细学习了一下 Mounting 挂载阶段中的三个生命周期函数。下节课会学习 Updation 阶段的生命周期函数。
