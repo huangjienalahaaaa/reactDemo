@@ -1,58 +1,28 @@
 /*
-  2.使用动画:
-  * 使用动画的关键词是animation，然后后边跟上你的制作的动画名称，如下面这段代码:
-  -> .hide{ animation:hide-item 2s ease-in ; }
-  这句的意思就是,使用hide-item动画，持续时间是2秒钟，然后缓动效果是由慢到快（开始的时候慢，之后快）。
-  * 但是你会发现，动画执行一遍后又恢复了原状，这个是因为没设置forwards属性，它是用来控制停止到最后一帧的。 我们把代码改写成下面的样子:
-  －＞　.hide{ animation:hide-item 2s ease-in forwards; }
-
+* xxx-enter: 进入（入场）前的CSS样式；
+* xxx-enter-active:进入动画直到完成时之前的CSS样式;
+* xxx-enter-done:进入完成时的CSS样式;
+* xxx-exit:退出（出场）前的CSS样式;
+* xxx-exit-active:退出动画知道完成时之前的的CSS样式。
+* xxx-exit-done:退出完成时的CSS样式。
 */
-.show {
-  animation: show-item 2s ease-in forwards;
+.boss-text-enter {
+  opacity: 0;
 }
-
-.hide {
-  animation: hide-item 2s ease-in forwards;
+.boss-text-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms;
 }
-
-
-/*
-1.keyframes动画介绍：
-* 此属性与animation属性是密切相关的，keyframes译成中文就是关键帧，我最早接触这个关键帧的概念是字flash中，现在Flash已经退出历史舞台了。
-* 他和transition比的优势是它可以更加细化的定义动画效果。比如我们设置上节课的按钮隐藏动画，不仅可以设置透明度，还可以设置颜色。
-* 如下@keyframes hide-item {}　和　@keyframes show-item {}，这就算是你的动画制作好了，但是动画还没有使用。
-*/
-@keyframes hide-item {
-  0% {
-    opacity: 1;
-    color: yellow;
-  }
-
-  50% {
-    opacity: 0.5;
-    color: red;
-  }
-
-  100% {
-    opacity: 0;
-    color: green;
-  }
+.boss-text-enter-done {
+  opacity: 1;
 }
-
-@keyframes show-item {
-  0% {
-    opacity: 0;
-    color: yellow;
-  }
-
-  50% {
-    opacity: 0.5;
-    color: red;
-  }
-
-  100% {
-    opacity: 1;
-    color: green;
-  }
+.boss-text-exit {
+  opacity: 1;
 }
-
+.boss-text-exit-active {
+  opacity: 0;
+  transition: opacity 2000ms;
+}
+.boss-text-exit-done {
+  opacity: 0;
+}

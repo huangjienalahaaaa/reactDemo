@@ -601,8 +601,31 @@ componentDidMount(){
 
 > 前端的动画技术发展到现在,完全可以独立出一个岗位。我目前不属于动画岗，能力有限，也只是简单的给小伙伴们讲讲，做一些前端常用的效果。这节课先用我们最熟悉的 CSS3 在 React 中制作一个显示隐藏的动画特效，注意这是用 CSS3 实现的，其实 React 只做了业务逻辑。
 
-# v1.21 CSS3 的 keyframes 动画
+# v1.21 CSS3 的 keyframes 动画:
 
 > 用 <font color="red">transition</font> 只能作一些最简单的动画，如果你想稍微复杂点，<font color="red">transition</font> 就做不出来了。这时候就可以用 CSS3 中的关键帧动画 <font color="red">keyframes</font>。这节课就花几分钟学习一下 keyframes，如果你 CSS3 动画不能分的知识很好，完全可以跳过这节课。
 
 - 总结:keyframes 也是只能实现很简单的动画效果，一些复杂的动画最好还是使用别人造好的轮子，下节课继续学习 React 中的动画吧
+
+# v1.22 react-transition-group:
+
+> React 有着极好的开发生态，开发需要的任何基本需求都可以找到官方或大神造的轮子，动画这种必不可少的东西当然也不例外，React 生态中有很多第三方的动画组件，你应该学习一下 <font color="red">react-transition-group</font>
+> 动画组件。目前我在工作中使用表现很好，可以满足日常动画开发需求。
+
+推荐的最重要理由是：这个也是 react 官方提供的动画过渡库，有着完善的 API 文档（完善到我都不好意思再讲一遍）。
+
+**_安装 react-transition-group：_**
+使用它要先进行安装，这里使用 npm 的形式进行安装了，当然也可以使用 yarn。
+
+先用 VSCode 打开项目根目录，然后打开终端，输入下面的命令，进行安装：
+
+> npm install react-transition-group --save
+
+安装好后，你可以先去 github 上来看一下文档，他是有着三个核心库（或者叫组件）。
+
+- Transition (最基本的库)
+- CSSTransition(用 css 来表示的)
+- TransitionGroup(很多 dom 元素做动画的库)
+
+1. 使用 CSSTransition:
+   讲解看代码

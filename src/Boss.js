@@ -1,31 +1,38 @@
-// 动画组件
 import React, { Component } from "react";
+
+//1. 引入CSSTransition库
+import { CSSTransition } from "react-transition-group";
 class Boss extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //1. '显示隐藏' 要实现这个业务逻辑，先在constructor里增加state值isShow
       isShow: true,
     };
-    //4. 在constructor里绑定一下this
     this.toToggole = this.toToggole.bind(this);
   }
   render() {
     return (
       <div>
-        <div className={this.state.isShow ? "show" : "hide"}>
+        {/*
+          2.引入CSSTransition后便可以使用了，使用的方法就和使用自定义组件一样,直接写<CSSTransition>，而且不再需要管理className了，这部分由CSSTransition进行管理，如下（也就是说,<CSSTransition>定义的动画会增加到下面的 <div>BOSS级人物-孙悟空</div>组件上）：
+          写完之后看style.css
+          */}
+        {/* <div className={this.state.isShow ? "show" : "hide"}>
           BOSS级人物-孙悟空
-        </div>
+        </div> */}
+        <CSSTransition
+          in={this.state.isShow} //用于判断是否出现的状态
+          timeout={2000} //动画持续时间
+          classNames="boss-text" //className值，防止重复.接下来写css都要加上classNames的值表示前缀
+          unmountOnExit //当组件退场的时候，dom也就被删除了
+        ></CSSTransition>
+        <div>BOSS级人物-孙悟空</div>
         <div>
-          {
-            //3.有了toToggole方法后，可以给<button>加上onClick响应事件了，
-          }
           <button onClick={this.toToggole}>召唤Boss</button>
         </div>
       </div>
     );
   }
-  //2.需要点击按钮时，有响应的事件，所以需要一个方法，我们编写一个toToggole()方法，代码如下：
   toToggole() {
     this.setState({
       isShow: this.state.isShow ? false : true,
