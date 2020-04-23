@@ -600,3 +600,9 @@ componentDidMount(){
 <font color="red"></font>
 
 > 前端的动画技术发展到现在,完全可以独立出一个岗位。我目前不属于动画岗，能力有限，也只是简单的给小伙伴们讲讲，做一些前端常用的效果。这节课先用我们最熟悉的 CSS3 在 React 中制作一个显示隐藏的动画特效，注意这是用 CSS3 实现的，其实 React 只做了业务逻辑。
+
+# v1.21 CSS3 的 keyframes 动画
+
+> 用 <font color="red">transition</font> 只能作一些最简单的动画，如果你想稍微复杂点，<font color="red">transition</font> 就做不出来了。这时候就可以用 CSS3 中的关键帧动画 <font color="red">keyframes</font>。这节课就花几分钟学习一下 keyframes，如果你 CSS3 动画不能分的知识很好，完全可以跳过这节课。
+
+<font color="red"></font>
