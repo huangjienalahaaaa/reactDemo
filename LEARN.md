@@ -481,3 +481,20 @@ componentWillReceiveProps(){
 - 如果已经存在于 Dom 中，函数才会被执行（即：只有发生变化的时候，第二次渲染的时候，这个函数才会被执行）。
 
 这个生命周期算是比较复杂的一个生命周期，需要我们花点时间去消化。
+
+# v1.16 生命周期讲解-3:
+
+> 其实这节课算是一个小的补充，把最后一个 React 的生命周期函数讲一下，这个生命周期周期函数就是 <font color="red">componentWillUnmount</font>，它是在组件去除时执行。
+
+**_componentWillUnmount 函数:_**
+这个函数时组件从页面中删除的时候执行，比如在 XiaojiejieItem.js，写入下面的代码:
+
+```javascript
+//当组件从页面中删除的时候执行
+componentWillUnmount(){
+    console.log('child - componentWillUnmount')
+}
+```
+
+写完后，可以到浏览器终端中查看结果，当我们点击服务项，服务项被删除时，这个函数就被执行了。
+总结:通过三节课的学习，我们已经把 React 的所有生命周期函数都讲完了，下节课会具体讲一下生命周期函数在实际开发中的应用。
