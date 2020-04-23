@@ -5,6 +5,7 @@
   这句的意思就是,使用hide-item动画，持续时间是2秒钟，然后缓动效果是由慢到快（开始的时候慢，之后快）。
   * 但是你会发现，动画执行一遍后又恢复了原状，这个是因为没设置forwards属性，它是用来控制停止到最后一帧的。 我们把代码改写成下面的样子:
   －＞　.hide{ animation:hide-item 2s ease-in forwards; }
+
 */
 .show {
   animation: show-item 2s ease-in forwards;
@@ -54,3 +55,4 @@
     color: green;
   }
 }
+

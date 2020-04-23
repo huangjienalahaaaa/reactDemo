@@ -605,4 +605,4 @@ componentDidMount(){
 
 > 用 <font color="red">transition</font> 只能作一些最简单的动画，如果你想稍微复杂点，<font color="red">transition</font> 就做不出来了。这时候就可以用 CSS3 中的关键帧动画 <font color="red">keyframes</font>。这节课就花几分钟学习一下 keyframes，如果你 CSS3 动画不能分的知识很好，完全可以跳过这节课。
 
-<font color="red"></font>
+- 总结:keyframes 也是只能实现很简单的动画效果，一些复杂的动画最好还是使用别人造好的轮子，下节课继续学习 React 中的动画吧
