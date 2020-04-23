@@ -1,0 +1,15 @@
+.show {
+    opacity: 1;
+    transition: all 1.5s ease-in;
+}
+
+.hide {
+    opacity: 0;
+    /*
+     transition：设置动画：
+     　1. all ->要所有的效果
+       2. 1.5s -> 动画时间
+       3. ease-in ->先慢后快
+     */
+    transition: all 1.5s ease-in;
+}
