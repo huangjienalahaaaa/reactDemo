@@ -543,3 +543,56 @@ componentDidMount(){
 ```
 
 上面的代码是以掘金的一个接口为例，做了一次 <font color="red">ajax </font>请求。并且请求到了数据，给我们返回了。 总结：这节课学习了 <font color="red">Axios</font> 的简单用法，并用最简单的方式，请求到了一个掘金网站的数据接口。ajax 请求在你的项目中，会经常使用，也是我们读取和写入数据的一个桥梁，所以学习 <font color="red">React</font> 的过程中，使用 <font color="red">Axios</font> 作 ajax 请求非常重要，动手练习一下吧。
+
+# v1.19 用 Axios 请求 EasyMock 数据:
+
+> 上节课只是小试身手，用了一个掘金的临时接口，这个接口并不是自己写的，没准什么时候就不能使用了。在开发中都是前后端分离的，我们也需要自己模拟数据，通常把自己模拟数据这个过程就叫做 <font color="red">mock</font>，你可以用软件自己本地模拟数据，但是作为一个云注意者，我还是选择使用 <font color="red">Easy-mock</font> 来模拟接口数据。
+
+**_EasyMock 新建一个接口：_**
+
+EasyMock 网站:https://www.easy-mock.com/
+
+然后你没注册需要注册一下，剩下的过程就看视频吧，因为这个都是些图形化的东西，我在视频中会详细讲解。
+
+在创建接口时，写下如下代码：
+
+```javascript
+{
+  "data": ['基础按摩', '躺式采耳', '中药泡脚']
+}
+```
+
+然后在上节课的 Axios 代码部分，把请求改为 get,然后预览，到控制台查看结果。
+
+```javascript
+componentDidMount(){
+    axios.get('改为你自己的接口URL')
+        .then((res)=>{console.log('axios 获取数据成功:'+JSON.stringify(res))  })
+        .catch((error)=>{console.log('axios 获取数据失败'+error)})
+}
+```
+
+这时候你应该可以获得接口数据了，也说明我们的接口制作正常了，这就很类似我们项目中的真实接口了。
+
+**_修改程序　变为动态接口：_**
+在客户端已经得到了远程数据，那剩下的就是 <font color="red">setState</font> 一下就可以了，代码如下：
+
+```javascript
+
+componentDidMount(){
+    axios.get('xxxx')
+        .then((res)=>{
+            console.log('axios 获取数据成功:'+JSON.stringify(res))
+
+            this.setState({
+                list:res.data.data
+            })
+          })
+        .catch((error)=>{console.log('axios 获取数据失败'+error)})
+}
+```
+
+那这时候再浏览 React 程序，也是完全可以使用的，不过已经不是以前写死的东西，而是使用远端接口数据。
+总结：我们这两节课只是让你简单的学会 React 远程请求接口的方法，以后会用实战给大家讲解这部分知识，这里只要做到有个基本认识就可以了。
+
+<font color="red"></font>
