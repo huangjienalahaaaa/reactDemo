@@ -502,3 +502,44 @@ componentWillUnmount(){
 # v1.17 生命周期改善程序性能：
 
 > 已经对 React 生命周期有了认识，那如何利用它提高组件的性能那？这节课我们会讲一个通过 <font>shouldComponentUpdate</font> 函数，改善 React 组件性能的例子。为了让这节课讲述的内容更加清晰，可以删除上几节课的生命周期函数。
+
+# v1.18 用 Axios 请求远程数据：
+
+> 有了生命周期的知识，这节课学习远程数据请求的知识，小伙伴们肯定都知道，ajax 可以远程请求，但是这写起来太麻烦了，我们用程序的 ajax 请求框架 Axios 来实现。
+
+**_安装 Axios:_**
+Axios 的安装可以使用 npm 来进行安装，你可以直接在项目根目录下，输入下面的代码。
+
+> npm install -save axios
+
+输入 后就可以正在的开始安装了。
+
+**_npm install -save 和 -save-dev 分不清:_**
+
+- <font color="red">npm install xxx</font>:安装项目到项目目录(node_modules)下，不会将模块依赖写入<font color="red">devDependencies</font>或<font color="red">dependencies</font>。
+
+* <font color="red">npm install -g xxx</font>:<font color="red">-g</font>的意思是将模块安装到全局，具体安装到磁盘哪个位置，要看 <font color="red">npm config prefix</font>的位置
+
+- <font color="red">npm install -save xxx</font>:<font color="red">-save</font>的意思是将模块安装到项目目录下，并在<font color="red">package</font>文件的<font color="red">dependencies</font>节点写入依赖。
+
+* <font color="red">npm install -save-dev xxx</font>:<font color="red">-save-dev</font>的意思是将模块安装到项目目录下，并在<font color="red">package</font>文件的<font color="red">devDependencies</font>节点写入依赖。
+
+作为一个前端，要清楚的知道<font color="red">npm install</font>这四种用法，防止项目依赖错误，在别人下载你的代码没办法跑起来。
+
+**_axios 请求数据:_**
+
+安装好 axiso 之后，需要在使用 ajax 的地方先引入 axios,比如现在想在 Xiaojiejie.js 中使用 axios`，写入下面的代码进行引入:
+
+> import axios from 'axios'
+
+引入后，可以在 <font color="red">componentDidMount</font> 生命周期函数里请求 ajax，我也建议在 <font color="red">componentDidMount</font> 函数里执行，因为在 render 里执行，会出现很多问题，比如一直循环渲染；在 <font color="red">componentWillMount</font> 里执行，在使用 RN 时，又会有冲突。所以强烈建议在 <font color="red">componentDidMount</font> 函数里作 <font color="red">ajax</font> 请求。
+
+```javascript
+componentDidMount(){
+    axios.post('https://web-api.juejin.im/v3/web/wbbr/bgeda')
+        .then((res)=>{console.log('axios 获取数据成功:'+JSON.stringify(res))  })
+        .catch((error)=>{console.log('axios 获取数据失败'+error)})
+}
+```
+
+上面的代码是以掘金的一个接口为例，做了一次 <font color="red">ajax </font>请求。并且请求到了数据，给我们返回了。 总结：这节课学习了 <font color="red">Axios</font> 的简单用法，并用最简单的方式，请求到了一个掘金网站的数据接口。ajax 请求在你的项目中，会经常使用，也是我们读取和写入数据的一个桥梁，所以学习 <font color="red">React</font> 的过程中，使用 <font color="red">Axios</font> 作 ajax 请求非常重要，动手练习一下吧。
