@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import XiaojiejieItem from "./XiaojiejieItem";
 import axios from "axios";
-//1.引入Boss组件以及css
 import Boss from "./Boss";
 import "./style.css";
 class Xiaojiejie extends Component {
@@ -54,9 +53,7 @@ class Xiaojiejie extends Component {
             );
           })}
         </ul>
-        {
-          //２．在这里使用Boss组件
-        }
+
         <Boss></Boss>
       </Fragment>
     );

@@ -629,3 +629,6 @@ componentDidMount(){
 
 1. 使用 CSSTransition:
    讲解看代码
+
+# v1.23 多DOM动画制作和编写:
+> 通过上一节的学习，只能控制一个DOM元素的动画，想控制多个动画react-transition-group这个动画库也是可以做到的。这节课就带你了解一下多DOM动画控制的方法。
