@@ -3,6 +3,10 @@ import XiaojiejieItem from "./XiaojiejieItem";
 import axios from "axios";
 import Boss from "./Boss";
 import "./style.css";
+
+
+//1.引入transitionGrop和CSSTransition库。接下去你有了transitionGrop，你就可以使用多dom了。
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 class Xiaojiejie extends Component {
   constructor(props) {
     super(props);
@@ -36,26 +40,39 @@ class Xiaojiejie extends Component {
           />
           <button onClick={this.addList.bind(this)}> 增加服务 </button>
         </div>
-        <ul
-          ref={(ul) => {
-            this.ul = ul;
-          }}
-        >
-          {this.state.list.map((item, index) => {
-            return (
-              <div key={item + index}>
-                <XiaojiejieItem
-                  content={item}
-                  index={index}
-                  deleteItem={this.deleteItem.bind(this)}
-                ></XiaojiejieItem>
-              </div>
-            );
-          })}
+        <ul ref={(ul) => { this.ul = ul }}>
+          {
+            /*
+              2.在循环的外面加上<TransitionGroup>标签：
+                -> 这个需要放在循环的外边，这样才能形成一个组动画,但是只有这个<TransitonGroup>是不够的，你还是需要加入<CSSTransition>,来定义动画。
+            */
+          }
+          <TransitionGroup>
+            {
+              this.state.list.map((item, index) => {
+                return (
+                  // 3.加入<CSSTranstion>标签：（因为这个动画效果是控制XiaojiejieItem的，所以在XiaojiejieItem上面写）
+                  <CSSTransition CSSTransition CSSTransition
+                    timeout={1000}
+                    classNames='boss-text'
+                    unmountOnExit
+                    appear={true} //如果你想要它出现的时候就有这个动画效果，就加 appear={true} 
+                    key={index + item} //因为这个是个循环，所以最外层需要一个key值
+                  ></CSSTransition>
+                  <XiaojiejieItem
+                    key={index + item}
+                    content={item}
+                    index={index}
+                    deleteItem={this.deleteItem.bind(this)}
+                  />
+                )
+              })
+            }
+          </TransitionGroup>
         </ul>
 
         <Boss></Boss>
-      </Fragment>
+      </Fragment >
     );
   }
   inputChange() {
